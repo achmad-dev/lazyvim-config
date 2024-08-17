@@ -52,6 +52,17 @@ vim.g.trouble_lualine = true
 
 local opt = vim.opt
 
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+
+opt.spell = true
+opt.spelllang = { "en_us" }
+
+opt.number = true
+opt.title = true
+opt.autoindent = true
+opt.smartindent = true
+
 opt.autowrite = true -- Enable auto write
 -- only set clipboard if not in ssh, to make sure the OSC 52
 -- integration works automatically. Requires Neovim >= 0.10.0
