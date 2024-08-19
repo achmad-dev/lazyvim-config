@@ -52,11 +52,7 @@ vim.g.trouble_lualine = true
 
 local opt = vim.opt
 
-opt.encoding = "utf-8"
-opt.fileencoding = "utf-8"
 
-opt.spell = true
-opt.spelllang = { "en_us" }
 
 opt.number = true
 opt.title = true
