@@ -1,3 +1,6 @@
+--  install sudo apt install libstdc++-12-dev
+--  also install sudo apt install libstdc++-12-doc
+-- to avoid any header error from lsp
 return {
     {
         "nvim-treesitter/nvim-treesitter",
