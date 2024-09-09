@@ -95,6 +95,16 @@ return {
                     }
                 }
             })
+             -- Create an augroup for the auto-formatting
+            vim.api.nvim_create_augroup("AutoFormat", {})
+
+            -- Create an autocmd to run formatting on save
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = "AutoFormat",
+                callback = function()
+                    vim.cmd("FormatWrite")
+                end,
+            })
         end
     }
 }
