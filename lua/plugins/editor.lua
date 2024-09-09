@@ -347,4 +347,25 @@ return {
             { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
         },
     },
+    {
+        "goolord/alpha-nvim",
+        -- dependencies = { 'echasnovski/mini.icons' },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function()
+          local startify = require("alpha.themes.startify")
+          -- available: devicons, mini, default is mini
+          -- if provider not loaded and enabled is true, it will try to use another provider
+          startify.file_icons.provider = "devicons"
+          require("alpha").setup(
+            startify.config
+          )
+        end,
+    },
+    {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        config = true
+        -- use opts = {} for passing setup options
+        -- this is equivalent to setup({}) function
+    },
 }
