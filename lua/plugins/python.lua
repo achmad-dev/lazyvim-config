@@ -5,7 +5,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
-     opts = { ensure_installed = { "debugpy" } },
+    opts = { ensure_installed = { "debugpy" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -21,7 +21,9 @@ return {
           keys = {
             {
               "<leader>co",
-              function() require("lazyvim.util").lsp.organize_imports() end,
+              function()
+                require("lazyvim.util").lsp.organize_imports()
+              end,
               desc = "Organize Imports",
             },
           },
@@ -30,7 +32,9 @@ return {
           keys = {
             {
               "<leader>co",
-              function() require("lazyvim.util").lsp.organize_imports() end,
+              function()
+                require("lazyvim.util").lsp.organize_imports()
+              end,
               desc = "Organize Imports",
             },
           },
@@ -46,6 +50,19 @@ return {
         opts.servers[server] = opts.servers[server] or {}
         opts.servers[server].enabled = true -- Enable all the listed LSP servers
       end
+
+      -- Configure pyright specifically
+      opts.servers.pyright = {
+        settings = {
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
+              diagnosticMode = "workspace", -- Use "workspace" for full project diagnostics
+            },
+          },
+        },
+      }
     end,
   },
   {
@@ -66,25 +83,35 @@ return {
   },
   {
     "linux-cultist/venv-selector.nvim",
-      dependencies = {
-        "neovim/nvim-lspconfig", 
-        "mfussenegger/nvim-dap", "mfussenegger/nvim-dap-python", --optional
-        { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
-      },
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mfussenegger/nvim-dap",
+      "mfussenegger/nvim-dap-python", --optional
+      { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+    },
     lazy = false,
     branch = "regexp", -- This is the regexp branch, use this for the new version
     config = function()
-        require("venv-selector").setup()
-      end,
-      keys = {
-        { ",v", "<cmd>VenvSelect<cr>" },
-      },
+      require("venv-selector").setup()
+    end,
+    keys = {
+      { ",v", "<cmd>VenvSelect<cr>" },
+    },
   },
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
+      -- Existing configuration
       opts.auto_brackets = opts.auto_brackets or {}
       table.insert(opts.auto_brackets, "python")
+
+      -- Setup sources for completion
+      opts.sources = {
+        { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "path" },
+        -- Add additional sources as needed
+      }
     end,
   },
   {
