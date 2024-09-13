@@ -1,12 +1,26 @@
 return {
-  -- neodev
+  -- lazydev
   {
-    "folke/neodev.nvim",
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
     opts = {
       library = {
-        runtime = "~/projects/neovim/runtime/",
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
       },
     },
+  },
+  { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+  { -- optional completion source for require statements and module annotations
+    "hrsh7th/nvim-cmp",
+    opts = function(_, opts)
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, {
+        name = "lazydev",
+        group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+      })
+    end,
   },
 
   {
@@ -59,22 +73,6 @@ return {
       servers = {
         cssls = {},
         html = {},
-        basedpyright = {
-          settings = {
-            basedpyright = {
-              analysis = {
-                diagnosticSeverityOverrides = {
-                  reportWildcardImportFromLibrary = "none",
-                  reportUnusedImport = "information",
-                  reportUnusedClass = "information",
-                  reportUnusedFunction = "information",
-                  reportOptionalMemberAccess = "none",
-                },
-              },
-              disableTaggedHints = true,
-            },
-          },
-        },
         lua_ls = {
           single_file_support = true,
           ---@type lspconfig.settings.lua_ls
@@ -114,57 +112,6 @@ return {
       },
     },
   },
-
-  {
-    "stevearc/conform.nvim",
-    optional = true,
-    opts = {
-      formatters_by_ft = {
-        ["javascript"] = { "eslint_d" },
-        ["javascriptreact"] = { "eslint_d" },
-        ["typescript"] = { "eslint_d" },
-        ["typescriptreact"] = { "eslint_d" },
-        ["python"] = function(bufnr)
-          if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "ruff_fix", "ruff_format" }
-          else
-            return { "isort", "black" }
-          end
-        end,
-        ["sh"] = { "shfmt" },
-        ["c"] = { "uncrustify" },
-        ["cpp"] = { "uncrustify" },
-        ["xml"] = { "xmllint" },
-      },
-      formatters = {
-        eslint_d = {
-          condition = function(_self, ctx)
-            local package_json = vim.fs.find({ "package.json" }, { path = ctx.filename, upward = true })[1]
-            if package_json then
-              local f = io.open(package_json, "r")
-              if f then
-                local data = vim.json.decode(f:read("*all"))
-                f:close()
-                if data and data.eslintConfig then
-                  return true
-                end
-              end
-            end
-            return vim.fs.find({ ".eslintrc", ".eslintrc.js", ".eslintrc.cjs", ".eslintrc.json" }, {
-              path = ctx.filename,
-              upward = true,
-            })[1]
-          end,
-        },
-        dprint = {
-          condition = function(_, ctx)
-            return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
-          end,
-        },
-      },
-    },
-  },
-
   {
     "mfussenegger/nvim-lint",
     opts = {

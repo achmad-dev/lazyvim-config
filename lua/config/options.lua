@@ -52,8 +52,6 @@ vim.g.trouble_lualine = true
 
 local opt = vim.opt
 
-
-
 opt.number = true
 opt.title = true
 opt.autoindent = true
@@ -134,6 +132,6 @@ vim.g.markdown_recommended_style = 0
 
 -- LSP Server to use for Python.
 -- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "pyright"
+vim.g.lazyvim_python_lsp = "jedi-language-server"
 -- Set to "ruff_lsp" to use the old LSP implementation version.
-vim.g.lazyvim_python_ruff = "ruff"
+vim.g.lazyvim_python_ruff = "ruff_lsp"
