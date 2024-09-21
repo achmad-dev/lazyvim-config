@@ -30,7 +30,7 @@ require("lazy").setup({
     version = false, -- always use the latest git commit
     -- version = "*", -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { "kanagawa", "tokyonight", "catppuccin" } },
+  install = { colorscheme = { "tokyonight", "kanagawa", "catppuccin" } },
   checker = {
     enabled = true, -- check for plugin updates periodically
     notify = false, -- notify on update
@@ -54,9 +54,9 @@ require("lazy").setup({
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+vim.keymap.set("n", "<C-fg>", builtin.live_grep, {})
+vim.keymap.set("n", "<C-fb>", builtin.buffers, {})
+vim.keymap.set("n", "<C-fh>", builtin.help_tags, {})
 
 -- Open PDF files
 vim.api.nvim_create_autocmd("BufEnter", {

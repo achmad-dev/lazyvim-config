@@ -3,7 +3,7 @@ return {
     "williamboman/mason.nvim",
     opts = { ensure_installed = { "clang-format", "gofumpt", "ruff", "ocamlformat", "black", "isort" } },
   },
-   {
+  {
     "stevearc/conform.nvim",
     optional = true,
     opts = {
@@ -26,6 +26,7 @@ return {
         ["sh"] = { "shfmt" },
         ["c"] = { "uncrustify" },
         ["cpp"] = { "uncrustify" },
+        ["dart"] = { "dart_format" },
         ["xml"] = { "xmllint" },
         ["*"] = { "uncrustify" },
       },

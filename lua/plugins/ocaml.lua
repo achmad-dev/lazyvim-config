@@ -1,33 +1,43 @@
 return {
-    {
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
-        if type(opts.ensure_installed) == "table" then
+      if type(opts.ensure_installed) == "table" then
         vim.list_extend(opts.ensure_installed, { "ocaml" })
-        end
+      end
     end,
-    },
-    {
+  },
+  {
     "neovim/nvim-lspconfig",
     opts = {
-        servers = {
+      servers = {
         ocamllsp = {
-            get_language_id = function(_, ftype)
-            return language_id_of[ftype]
-            end,
-            root_dir = function(fname)
+          get_language_id = function(_, ftype)
+            filetypes = {
+              "ocaml",
+              "reason",
+              "ocaml.interface",
+              "ocaml.ocamllex",
+              "ocaml.ocamlyacc",
+              "ocaml.menhir",
+              "dune",
+            }
+            return vim.tbl_contains(filetypes, ftype) and "ocaml" or nil
+          end,
+          root_dir = function(fname)
             return require("lspconfig.util").root_pattern(
-                "*.opam",
-                "esy.json",
-                "package.json",
-                ".git",
-                "dune-project",
-                "dune-workspace",
-                "*.ml"
+              "*.opam",
+              "esy.json",
+              "package.json",
+              ".git",
+              "dune-project",
+              "dune-workspace",
+              "*.ml"
             )(fname)
-            end,
+          end,
         },
-        },
+      },
     },
-    }
+  },
 }
+
