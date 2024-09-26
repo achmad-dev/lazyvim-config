@@ -70,6 +70,16 @@ return {
           "If you have no failure in life, you will fail in life.",
           "Your task is not to seek for love, but merely to seek and find all the barriers within yourself that you have built against it.",
           "The wound is the place where the Light enters you.",
+          "And do not mix the truth with falsehood or conceal the truth while you know [it].",
+          "So remember Me; I will remember you. And be grateful to Me and do not deny Me.",
+          "Indeed we belong to Allah, and indeed to Him we will return.",
+          "Indeed, the mercy of Allah is near to the doers of good.",
+          "So when the Qur’an is recited, then listen to it and pay attention that you may receive mercy.",
+          "and Allah would not punish them while they seek forgiveness.",
+          "[Remember] when you asked help of your Lord, and He answered you, “Indeed, I will reinforce you with a thousand from the angels, following one another.",
+          "Indeed, to Allah belongs the dominion of the heavens and the earth; He gives life and causes death. And you have not besides Allah any protector or any helper.",
+          "Go forth, whether light or heavy, and strive with your wealth and your lives in the cause of Allah . That is better for you, if you only knew.",
+          "Oh you who believe! Seek help with patient perseverance and prayer, for God is with those who patiently persevere.",
         }
         if not selected_quote then
           selected_quote = quotes[math.random(0, #quotes)]
