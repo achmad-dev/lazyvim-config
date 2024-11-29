@@ -25,12 +25,6 @@ vim.g.root_spec = { "lsp", { ".git", "lua" }, "cwd" }
 -- Set to false to disable.
 vim.g.lazygit_config = true
 
--- Options for the LazyVim statuscolumn
-vim.g.lazyvim_statuscolumn = {
-  folds_open = false, -- show fold sign when fold is open
-  folds_githl = false, -- highlight fold sign with git sign color
-}
-
 -- Optionally setup the terminal to use
 -- This sets `vim.o.shell` and does some additional configuration for:
 -- * pwsh
@@ -105,7 +99,6 @@ opt.spelloptions:append("noplainbuffer")
 opt.splitbelow = true -- Put new windows below current
 opt.splitkeep = "screen"
 opt.splitright = true -- Put new windows right of current
-opt.statuscolumn = [[%!v:lua.require'lazyvim.util'.ui.statuscolumn()]]
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.timeoutlen = vim.g.vscode and 1000 or 300 -- Lower than default (1000) to quickly trigger which-key
@@ -130,8 +123,8 @@ end
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
--- LSP Server to use for Python.
--- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "jedi-language-server"
--- Set to "ruff_lsp" to use the old LSP implementation version.
-vim.g.lazyvim_python_ruff = "ruff_lsp"
+-- -- LSP Server to use for Python.
+-- -- Set to "basedpyright" to use basedpyright instead of pyright.
+-- vim.g.lazyvim_python_lsp = "jedi-language-server"
+-- -- Set to "ruff_lsp" to use the old LSP implementation version.
+-- vim.g.lazyvim_python_ruff = "ruff_lsp"

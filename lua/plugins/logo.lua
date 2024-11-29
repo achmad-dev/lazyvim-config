@@ -42,7 +42,7 @@ return {
           └───────────────┘
     ]]
       local logo = string.rep("\n", 10) .. ganbattene .. "\n\n"
-      opts.config.header = vim.split(logo, "\n")
+      --opts.config.header = vim.split(logo, "\n")
     end,
   },
   {
@@ -50,6 +50,7 @@ return {
     requires = { "nvim-tree/nvim-web-devicons", opt = true },
     config = function()
       local lualine = require("lualine")
+      --- NOTE: this for running text in lualine
       -- Define global variables for animation state
       local position = 1 -- starting position of the animation
       local visible_chars = 40 -- Only show 7 characters at a time
@@ -57,29 +58,34 @@ return {
       -- The quote to animate
       local function quote()
         local quotes = {
-          "Kesedihan menyiapkanmu untuk kegembiraan. Dia menyapu bersih semuanya dari rumahmu, sehingga kegembiraan baru dapat memasuki ruang.",
+          "Kesedihan menyiapkanmu untuk kegembiraan. Dia menyapu bersih semuanya dari rumahmu, sehingga kegembiraan baru dapat memasuki ruang hatimu.",
           "Effort never betrays you",
           "The best way to predict the future is to invent it.",
           "Persistence pays off",
           "Continuance is power.",
           "Stumbling seven times but standing up eight.",
-          "Don’t look back, don’t look back, there is no dream in the back.",
-          "Believe in people, but believe in yourself a hundred times more.",
-          "You can’t change the direction of the wind, but you can adjust your sails. ",
-          "There’s luck in the leftovers.",
-          "If you have no failure in life, you will fail in life.",
-          "Your task is not to seek for love, but merely to seek and find all the barriers within yourself that you have built against it.",
-          "The wound is the place where the Light enters you.",
-          "And do not mix the truth with falsehood or conceal the truth while you know [it].",
-          "So remember Me; I will remember you. And be grateful to Me and do not deny Me.",
-          "Indeed we belong to Allah, and indeed to Him we will return.",
-          "Indeed, the mercy of Allah is near to the doers of good.",
-          "So when the Qur’an is recited, then listen to it and pay attention that you may receive mercy.",
-          "and Allah would not punish them while they seek forgiveness.",
-          "[Remember] when you asked help of your Lord, and He answered you, “Indeed, I will reinforce you with a thousand from the angels, following one another.",
-          "Indeed, to Allah belongs the dominion of the heavens and the earth; He gives life and causes death. And you have not besides Allah any protector or any helper.",
-          "Go forth, whether light or heavy, and strive with your wealth and your lives in the cause of Allah . That is better for you, if you only knew.",
-          "Oh you who believe! Seek help with patient perseverance and prayer, for God is with those who patiently persevere.",
+          -- "Don’t look back, don’t look back, there is no dream in the back.",
+          -- "Believe in people, but believe in yourself a hundred times more.",
+          -- "You can’t change the direction of the wind, but you can adjust your sails. ",
+          -- "There’s luck in the leftovers.",
+          -- "If you have no failure in life, you will fail in life.",
+          -- "Your task is not to seek for love, but merely to seek and find all the barriers within yourself that you have built against it.",
+          -- "The wound is the place where the Light enters you.",
+          -- "And do not mix the truth with falsehood or conceal the truth while you know [it].",
+          -- "So remember Me; I will remember you. And be grateful to Me and do not deny Me.",
+          -- "Indeed we belong to Allah, and indeed to Him we will return.",
+          -- "Indeed, the mercy of Allah is near to the doers of good.",
+          -- "So when the Qur’an is recited, then listen to it and pay attention that you may receive mercy.",
+          -- "and Allah would not punish them while they seek forgiveness.",
+          -- "[Remember] when you asked help of your Lord, and He answered you, “Indeed, I will reinforce you with a thousand from the angels, following one another.",
+          -- "Indeed, to Allah belongs the dominion of the heavens and the earth; He gives life and causes death. And you have not besides Allah any protector or any helper.",
+          -- "Go forth, whether light or heavy, and strive with your wealth and your lives in the cause of Allah . That is better for you, if you only knew.",
+          -- "Oh you who believe! Seek help with patient perseverance and prayer, for God is with those who patiently persevere.",
+          -- "Be patient, for your patience is with the help of Allah.",
+          -- "Patiently, then, persevere - for the Promise of Allah is true, and ask forgiveness for your faults, and celebrate the praises of your Lord in the evening and in the morning.",
+          -- "Verily man is in loss, except such as have faith, and do righteous deeds, and join together in the mutual enjoining of truth, and of patience and constancy.",
+          -- "And if you are patient, you will be successful.",
+          -- "No one will be granted such goodness except those who exercise patience and self-restraint, none but persons of the greatest good fortune.",
         }
         if not selected_quote then
           selected_quote = quotes[math.random(0, #quotes)]
@@ -118,10 +124,26 @@ return {
 
         return visible_text -- return the current visible part of the string
       end
+
+      --- NOTE: this for cat frames
+      local frames = {
+        "=^•ﻌ•^=",
+        "ฅ^•ﻌ•^_",
+        "ฅ^•ﻌ•^ฅ",
+      }
+      local frame_index = 1
+
+      -- Function to get the next frame
+      local function get_next_frame()
+        frame_index = (frame_index % #frames) + 1
+        return frames[frame_index]
+      end
+
       -- Set a timer to refresh the lualine every 100ms
       vim.defer_fn(function()
         vim.defer_fn(function()
-          sliding_text()
+          ---sliding_text()
+          get_next_frame()
         end, 100) -- Recursive call to continue the animation
       end, 100)
       -- ganbatte
@@ -130,7 +152,9 @@ return {
       end
       -- ganbattene
       local function ganbattene()
-        return "がんばったね。|" .. sliding_text() .. "|"
+        ---return "がんばったね。|" .. sliding_text() .. "|"
+        ---return "がんばったね"
+        return "がんばったね。|" .. get_next_frame() .. "|"
       end
       --- lualine
       lualine.setup({
