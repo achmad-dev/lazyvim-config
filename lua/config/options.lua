@@ -125,6 +125,4 @@ vim.g.markdown_recommended_style = 0
 
 -- -- LSP Server to use for Python.
 -- -- Set to "basedpyright" to use basedpyright instead of pyright.
--- vim.g.lazyvim_python_lsp = "jedi-language-server"
--- -- Set to "ruff_lsp" to use the old LSP implementation version.
--- vim.g.lazyvim_python_ruff = "ruff_lsp"
+vim.g.lazyvim_python_lsp = "jedi-language-server"

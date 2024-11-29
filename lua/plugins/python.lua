@@ -5,7 +5,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts = { ensure_installed = { "debugpy", "ruff", "ruff-lsp", "jedi-language-server" } },
+    opts = { ensure_installed = { "debugpy", "ruff", "jedi-language-server" } },
   },
   {
     "neovim/nvim-lspconfig",
@@ -28,31 +28,20 @@ return {
             },
           },
         },
-        ruff_lsp = {
-          keys = {
-            {
-              "<leader>co",
-              function()
-                require("lazyvim.util").lsp.organize_imports()
-              end,
-              desc = "Organize Imports",
-            },
-          },
-        },
       },
     },
   },
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      local servers = { "ruff_lsp" }
+      local servers = { "ruff" }
       for _, server in ipairs(servers) do
         opts.servers[server] = opts.servers[server] or {}
-        opts.servers["ruff_lsp"].enabled = true -- Enable all the listed LSP servers
+        opts.servers["ruff"].enabled = true -- Enable all the listed LSP servers
       end
 
       -- Configure pyright specifically
-      opts.servers.ruff_lsp = {
+      opts.servers.ruff = {
         settings = {
           python = {
             analysis = {
